@@ -1,0 +1,20 @@
+from cryptography.fernet import Fernet
+
+# Generate a key and save it to a file
+key = Fernet.generate_key()
+with open('encrypt.key', 'wb') as key_file:
+    key_file.write(key)
+
+# Read the file you want to encrypt
+with open('secret.txt', 'rb') as file:
+    data = file.read()
+
+# Encrypt the data
+cipher = Fernet(key)
+encrypted_data = cipher.encrypt(data)
+
+# Save the encrypted data to a new file
+with open('secret.enc', 'wb') as file:
+    file.write(encrypted_data)
+
+print("Encryption complete! Key saved to encrypt.key and encrypted data to secret.enc")
